@@ -7,6 +7,8 @@ void main()
 	SDL_Rect M1,M2;//a ne pas depacer
 	SDL_Event event;
 	Personne p;
+	//int vectX=10;
+	//int vectY=10;
 	SDL_Surface *mat[3][5];
 	int direction,num;
 	if(SDL_Init(SDL_INIT_EVRYTHING)==-1){
@@ -37,7 +39,7 @@ void main()
 					if(event.key.keysym.sym == SDLK_UP)
 					{
 						p.up=1;
-						saut(&p,dt,posinit)
+						saut(&p,dt,p.posScreen)
 					
 					}
 					else

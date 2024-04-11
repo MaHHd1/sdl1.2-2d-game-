@@ -43,7 +43,8 @@ SDL_BlitSurface(p[D][N].posIMG,NULL,screen,&(p.posSurface));
 void movePerso(Personne *p,Uint32 dt)
 {
 
-	p->posScreen=0.5*p->acceleration*dt*dt+p->vitesse*dt
+	p->Step=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+	p->posScreen.x= p->posScreen.x + p->Step;
 	
 
 
@@ -53,12 +54,26 @@ void movePerso(Personne *p,Uint32 dt)
 }
 void saut(Personne *P,int dt, int posinit)
 {
-	if(p->posScreen == max)//cree valeur max a ne pas depacer
+	int G=10;
+	/*if(p->posScreen == max)//cree valeur max a ne pas depacer
 	      p->down=1;  //decente
 	if(p->down == 1)
 		
 	if(p->posScreen == posinit)
 		p->up=0;
+	if(p->up == 1)
+		
+	if(y == posy)
+		p->up=0;*/
+	//saut horizontale
+	p->posScreen.y = p->posScreen.y + val;
+	
+
+	//saut parabolique
+	p->posScreen.x = posinit + p->vitesse * dt;
+	p->posScreen.y = p->acceleration*p->posScreen.x*p->posScreen + 100;
+	p->vitesse = p->vitesse + G * dt;
+	
 		 
 	
 

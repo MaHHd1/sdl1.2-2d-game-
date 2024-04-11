@@ -20,6 +20,7 @@ typedef struct {
     int up;// jump wala lee 0 or 1
     int direction;// el i mtah el matrice image ;)
     int num;// el j mtah el matrice 
+    float Step;// How much does he need to move 
     
 
 } Personne;
