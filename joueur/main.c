@@ -3,21 +3,23 @@
 void main()
 {
 	SDL_Surface *screen;
-	Unit32 dt,t_prev;
+	Uint32 dt,t_prev;
 	SDL_Rect M1,M2;//a ne pas depacer
 	SDL_Event event;
 	Personne p;
+	float n;
 	//int vectX=10;
 	//int vectY=10;
 	SDL_Surface *mat[3][5];
 	int direction,num;
-	if(SDL_Init(SDL_INIT_EVRYTHING)==-1){
+	bool gameRunning = true;
+	if(SDL_Init(SDL_INIT_EVERYTHING)==-1){
 		printf("Coundn't initialise\n");
 	}
-	else
+         else
 	{
 		screen=SDL_SetVideoMode(SCREEN_W,SCREEN_H,32,SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
-		initPerso(Personne *p);
+		initPerso(&p);
 
 	while(gameRunning)
 	{	
@@ -39,7 +41,7 @@ void main()
 					if(event.key.keysym.sym == SDLK_UP)
 					{
 						p.up=1;
-						saut(&p,dt,p.posScreen)
+						
 					
 					}
 					else
@@ -48,15 +50,15 @@ void main()
 					}
 					if(event.key.keysym.sym == SDLK_RIGHT)
 					{
-						p.direction=1;
+						p.direction=0;
 					
 					}
 					if(event.key.keysym.sym == SDLK_LEFT)
 					{
-						p.direction=0;
+						p.direction=1;
 					
 					}
-					if((event.key.keysym.sym == SDLK_ESCAPE)
+					if(event.key.keysym.sym == SDLK_ESCAPE)
 					{
 						//acceleration
 	                                        p.acceleration+=0.005;
@@ -70,23 +72,31 @@ void main()
 					
 					}
 
+				}//CASE
+				
+
+			}//SWITCH
+			
+		}//WHILE EVENT
+				if(p.up==1)
+				{
+					saut(&p,dt,p.posScreen.x);
 				}
-				movePerso(&p,dt);
-				if(p->num==6)
+
+				if(p.num==6)
 					p.num=0;
 				else
 					p.num++;
-				animerPerso(Personne p);
-
+		if(p.direction == 0 || p.direction==1){
+				movePerso(&p,dt);
+				animerPerso(p);
 			}
-			
-		}
-		
+	
 		
 
 
-		dt=SDL_GetTicks()-t_prev
-	}
+				dt=SDL_GetTicks()-t_prev;
+	}//WHILE GAME RUNNING
 
 
 
@@ -95,4 +105,6 @@ void main()
 
 
 
-}
+}//ELSE
+}//MAIN
+
