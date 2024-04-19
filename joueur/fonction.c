@@ -16,9 +16,12 @@ void initPerso(Personne *p)
 	p->image[0][0].filename = "";
     	p->image[0][1].filename = "";
 	p->image[0][2].filename = "";
-	p->image[0][3].filename = "";
-	p->image[0][4].filename = "";
-	p->image[0][5].filename = "";
+	p->image[1][0].filename = "";
+	p->image[1][1].filename = "";
+	p->image[1][2].filename = "";
+	p->image[2][0].filename = "";
+	
+	
     
 
     for (int i = 0; i < 3; i++) {
@@ -42,13 +45,14 @@ void afficherPerso(Personne p,SDL_Surface *screen)
 	p->num=0;
 else
 	p->num++;*/
-int N = p.num;
-int D = p.direction;
-for(int i =0; i < 3; i++){
-for (int j=0; j < 5; j++){
-SDL_BlitSurface(p.image[i][j].surface,NULL,screen,&(p.posScreen));
-}}
+int N = p.num;//colone matrice
+int D = p.direction;//line matrice
+SDL_BlitSurface(p.image[D][N].surface,NULL,screen,&(p.posScreen));
+if(p.up=1 && D==0)
+	SDL_BlitSurface(p.image[2][0].surface,NULL,screen,&(p.posScreen));
 
+if(p.up=1 && D==1)
+	SDL_BlitSurface(p.image[2][1].surface,NULL,screen,&(p.posScreen));
 //SDL_BlitSurface(p.score,NULL,screen,155,147);
 if(p.vie.nv==3){
 	//SDL_BlitSurface(p.score,NULL,screen,155,147);
@@ -93,15 +97,17 @@ void saut(Personne *p,int dt, int posinit)
 		p->up=0;*/
 	//saut horizontale
 	p->posScreen.y = p->posScreen.y + val;
-	if(p->posScreen.y ==SV)
+	if(p->posScreen.y ==SV){
 		p->posScreen.y = p->posScreen.y - val;
+		p->up=0;}
 	
 
 	//saut parabolique
 	p->posScreen.x = posinit + p->vitesse * dt;
 	p->posScreen.y = p->acceleration*p->posScreen.x*p->posScreen.x + 100;
-	if(p->posScreen.y == SV)
-		p->posScreen.y = p->acceleration*p->posScreen.x*p->posScreen.x - 100;
+	if(p->posScreen.y >= SV){
+		p->posScreen.y = p->posScreen.y - 100;
+		p->up=0;}
 	p->vitesse = p->vitesse + G * dt;
 	
 		 
