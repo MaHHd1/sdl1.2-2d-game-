@@ -9,12 +9,12 @@
 #define SCREEN_W 1920
 #define SCREEN_H 1080
 typedef struct {
-    char *filename;
+    char filename[100];
     SDL_Surface *surface;
 
 } IMGv;
 typedef struct {
-	IMGv Life[5];
+	IMGv Life[3];
 	int nv;
 }life;
 typedef struct {
@@ -25,7 +25,7 @@ typedef struct {
 typedef struct {
     IMG image[3][5];// matrice type IMG Struct 
     SDL_Rect posScreen;// pos fel ecran 
-    SDL_Rect posIMG;
+    //SDL_Rect posIMG;
     float acceleration;// yejri wala lee
     float vitesse;
     int up;// jump wala lee 0 or 1

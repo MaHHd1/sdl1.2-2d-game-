@@ -9,30 +9,31 @@ void initPerso(Personne *p)
         p->acceleration=0;
 	p->score=100;
 	p->vie.nv=3;
-	
-	p->posIMG.y=0;
-	p->posIMG.w=10;//largeur image
-	p->posIMG.h=10;//Hauteur image
-	p->image[0][0].filename = "";
-    	p->image[0][1].filename = "";
-	p->image[0][2].filename = "";
-	p->image[1][0].filename = "";
-	p->image[1][1].filename = "";
-	p->image[1][2].filename = "";
-	p->image[2][0].filename = "";
+	p->posScreen.x=0;
+	p->posScreen.y=0;
+	p->posScreen.w=100;//largeur image
+	p->posScreen.h=100;//Hauteur image
+	p->image[0][0].filename = "images.png";
+    	p->image[0][1].filename = "images.png";
+	p->image[0][2].filename = "images.png";
+	p->image[1][0].filename = "images2.png";
+	p->image[1][1].filename = "images2.png";
+	p->image[1][2].filename = "images2.png";
+	p->image[2][0].filename = "images3.png";
 	
 	
     
 
     for (int i = 0; i < 3; i++) {
-	for (int j=0; j < 5; j++){
+	for (int j=0; j < 3; j++){
         p->image[i][j].surface = IMG_Load(p->image[i][j].filename);
-        if (p->image[i][j].surface == NULL) {
+}}
+        /*if (p->image[i][j].surface == NULL) {
             fprintf(stderr, "Erreur lors du chargement de l'image ");
             exit(EXIT_FAILURE);
          }
        }
-    }
+    }*/
 	
 	
 	
@@ -40,11 +41,7 @@ void initPerso(Personne *p)
 }//Perso
 void afficherPerso(Personne p,SDL_Surface *screen)
 {
-//etheya el max yetbadel tebah el matrice 
-/*if(p->num==6)
-	p->num=0;
-else
-	p->num++;*/
+
 int N = p.num;//colone matrice
 int D = p.direction;//line matrice
 SDL_BlitSurface(p.image[D][N].surface,NULL,screen,&(p.posScreen));
@@ -129,7 +126,7 @@ void liberer(Personne *p)
 }//liberer
 void animerPerso(Personne p)
 {
-int n=5,m=5,l=5;
+int n=3,m=5,l=5;
  if(p.direction==0){
 	if(p.num==n-1)
 		p.num=0;
