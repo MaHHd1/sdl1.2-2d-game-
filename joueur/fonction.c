@@ -20,12 +20,12 @@ void initPerso(Personne *p)
 	//strcpy(p->image[1][1].filename,"images2.png");
 	//strcpy(p->image[1][2].filename,"images2.png");
 	//strcpy(p->image[2][0].filename,"images3.png");
-	p->image[0][0].per = IMG_Load("images.jpg");
-	p->image[0][1].per = IMG_Load("player1.png");
-	p->image[0][2].per = IMG_Load("images.png");
-	p->image[1][0].per = IMG_Load("images2.png");
-	p->image[1][1].per = IMG_Load("images2.png");
-	p->image[1][2].per = IMG_Load("images2.png");
+	p->image[0][0].per = IMG_Load("dmv1.png");
+	p->image[0][1].per = IMG_Load("dmv2.png");
+	p->image[0][2].per = IMG_Load("dmv2.png");
+	p->image[1][0].per = IMG_Load("gm1.png");
+	p->image[1][1].per = IMG_Load("gm2.png");
+	p->image[1][2].per = IMG_Load("gm3.png");
 	
 	
 	
@@ -49,9 +49,11 @@ void initPerso(Personne *p)
 void afficherPerso(Personne *p,SDL_Surface *screen)
 {
 
-int N = p->num;//colone matrice
+//int N = p->num;//colone matrice
 int D = p->direction;//line matrice
-SDL_BlitSurface(p->image[D][N].per,NULL,screen,&p->posScreen);
+for (int i = 0; i < 3; i++) {
+SDL_BlitSurface(p->image[D][i].per,NULL,screen,&p->posScreen);
+}
 /*if(p.up=1 && D==0)
 	SDL_BlitSurface(p.image[2][0].surface,NULL,screen,&(p.posScreen));
 
@@ -77,8 +79,13 @@ if(p.vie.nv==0){
 void movePerso(Personne *p,Uint32 dt)
 {
 
-	p->Step=0.5*p->acceleration*dt*dt+p->vitesse*dt;
+	p->Step=0.5*p->acceleration*dt*dt+1*dt;
 	p->posScreen.x= p->posScreen.x + p->Step;
+	if(p->posScreen.x == 1900)
+		p->posScreen.x = 30;
+		
+	if(p-> posScreen.y == 1000)
+		p->posScreen.y = 460;
 	
 
 
@@ -103,24 +110,35 @@ void saut(Personne *p,int dt, int posinit,int ST)
 	if(y == posy)
 		p->up=0;*/
 	//saut horizontale
-	if(ST==0){
+	/*if(ST==0){
 	p->posScreen.y = p->posScreen.y + val;
 	if(p->posScreen.y ==SV){
 		p->posScreen.y = p->posScreen.y - val;
 		p->up=0;}
-	}
+	}*/
 	
 
 	//saut parabolique
-	if(ST==1){
-	p->posScreen.x = posinit + p->vitesse * dt;
-	p->posScreen.y = p->acceleration*p->posScreen.x*p->posScreen.x + 100;
-	if(p->posScreen.y >= SV){
-		p->posScreen.y = p->posScreen.y - 100;
-		p->up=0;}
-	//p->vitesse = p->vitesse + G * dt;
+	//if(ST==1){
+	int pos_absolux=-50;
+	int pos_absoluy=0;
+	if( p->up==1 )
+	{
+	pos_absolux+=2;
+	pos_absoluy=(-0.04*(pos_absolux*pos_absolux)+100);
+	p->posScreen.x+=pos_absolux+50;
+	p->posScreen.y-=pos_absoluy;
+	if(pos_absoluy==100){
+	p->posScreen.y+=pos_absoluy;
 	}
-	
+	if(pos_absolux>=50){
+   	pos_absolux=-50;
+   	p->up=0;
+
+	//p->vitesse = p->vitesse + G * dt;
+	//}
+}
+	}
 		 
 	
 
@@ -128,7 +146,7 @@ void saut(Personne *p,int dt, int posinit,int ST)
 }//Saut
 void liberer(Personne *p)
 {
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
 	for (int j=0; j < 3; j++){
 		SDL_FreeSurface(p->image[i][j].per);
 	}
@@ -140,7 +158,7 @@ void liberer(Personne *p)
 }//liberer
 void animerPerso(Personne *p)
 {
-int n=2,m=3,l=5;
+ int n=2,m=3,l=5;
  if(p->direction==0){
 	if(p->num==n-1)
 		p->num=0;
@@ -159,4 +177,5 @@ int n=2,m=3,l=5;
 	else
 		p->num++;
 }
+
 }//animer
