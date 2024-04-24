@@ -11,8 +11,8 @@ void initPerso(Personne *p)
 	p->vie.nv=3;
 	p->posScreen.x=30;
 	p->posScreen.y=460;
-	p->posScreen.w=100;//largeur image
-	p->posScreen.h=100;//Hauteur image
+	p->posScreen.w=1;//largeur image
+	p->posScreen.h=1;//Hauteur image
 	//strcpy(p->image[0][0].filename,"images.png");
     	//strcpy(p->image[0][1].filename,"images.png");
 	//strcpy(p->image[0][2].filename,"images.png");
@@ -20,12 +20,12 @@ void initPerso(Personne *p)
 	//strcpy(p->image[1][1].filename,"images2.png");
 	//strcpy(p->image[1][2].filename,"images2.png");
 	//strcpy(p->image[2][0].filename,"images3.png");
-	p->image[0][0].per = IMG_Load("dmv1.png");
-	p->image[0][1].per = IMG_Load("dmv2.png");
-	p->image[0][2].per = IMG_Load("dmv2.png");
-	p->image[1][0].per = IMG_Load("gm1.png");
-	p->image[1][1].per = IMG_Load("gm2.png");
-	p->image[1][2].per = IMG_Load("gm3.png");
+	p->image[0][0].per = IMG_Load("d1.png");
+	p->image[0][1].per = IMG_Load("d2.png");
+	p->image[0][2].per = IMG_Load("d2.png");
+	p->image[1][0].per = IMG_Load("g1.png");
+	p->image[1][1].per = IMG_Load("g2.png");
+	p->image[1][2].per = IMG_Load("g3.png");
 	
 	
 	
@@ -74,12 +74,12 @@ if(p.vie.nv==0){
 }
 }//afficher
 	*/
-//SDL_Flip(screen);
+SDL_Flip(screen);
 }
 void movePerso(Personne *p,Uint32 dt)
 {
 
-	p->Step=0.5*p->acceleration*dt*dt+1*dt;
+	p->Step=0.5*p->acceleration*dt*dt+0.5*dt;
 	p->posScreen.x= p->posScreen.x + p->Step;
 	if(p->posScreen.x == 1900)
 		p->posScreen.x = 30;
@@ -120,7 +120,7 @@ void saut(Personne *p,int dt, int posinit,int ST)
 
 	//saut parabolique
 	//if(ST==1){
-	int pos_absolux=-50;
+	/*int pos_absolux=-50;
 	int pos_absoluy=0;
 	if( p->up==1 )
 	{
@@ -138,7 +138,40 @@ void saut(Personne *p,int dt, int posinit,int ST)
 	//p->vitesse = p->vitesse + G * dt;
 	//}
 }
-	}
+	}*/
+	int pos_absolux = -50;
+int pos_absoluy = 0;
+
+if (p->up == 1) {
+    pos_absolux += 2;
+    pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
+    p->posScreen.x += pos_absolux + 50;
+    p->posScreen.y -= pos_absoluy;
+
+    if (pos_absoluy == 100) {
+        p->posScreen.y += pos_absoluy;
+    }
+
+    if (pos_absolux >= 50) {
+        pos_absolux = -50;
+        p->up = 0;
+	pos_absolux += 2;
+    pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
+    p->posScreen.x += pos_absolux + 50;
+    p->posScreen.y += pos_absoluy;
+
+    if (pos_absoluy == 100) {
+        p->posScreen.y -= pos_absoluy;
+    }
+
+    if (pos_absolux >= 50) {
+        pos_absolux = -50;
+        p->up = 1;
+    }
+    }
+} 
+
+
 		 
 	
 
@@ -158,14 +191,14 @@ void liberer(Personne *p)
 }//liberer
 void animerPerso(Personne *p)
 {
- int n=2,m=3,l=5;
+ int n=3,m=3,l=5;
  if(p->direction==0){
 	if(p->num==n-1)
 		p->num=0;
 	else
 		p->num++;
 	}
- else{
+ /*else{
 	if(p->num==n+m-1)
 		p->num=n;
 	else
@@ -177,5 +210,5 @@ void animerPerso(Personne *p)
 	else
 		p->num++;
 }
-
+*/
 }//animer
