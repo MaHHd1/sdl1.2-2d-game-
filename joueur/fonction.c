@@ -10,7 +10,7 @@ void initPerso(Personne *p)
 	p->score=100;
 	p->vie.nv=3;
 	p->posScreen.x=30;
-	p->posScreen.y=460;
+	p->posScreen.y=700;
 	p->posScreen.w=1;//largeur image
 	p->posScreen.h=1;//Hauteur image
 	//strcpy(p->image[0][0].filename,"images.png");
@@ -93,8 +93,10 @@ void movePerso(Personne *p,Uint32 dt)
 	}
 	
 		
-	if(p-> posScreen.y == 500)
-		p->posScreen.y = 460;
+	if(p->posScreen.x >= 1800)
+		p->posScreen.x = 1800;
+	if(p->posScreen.x <= 0)
+		p->posScreen.x = 30;
 
 	
 
@@ -149,7 +151,7 @@ void saut(Personne *p,int dt, int posinit,int ST)
 	//}
 }
 	}*/
-int pos_absolux = -50;
+/*int pos_absolux = -50;
 int pos_absoluy = 0;
 
 if (p->up == 1) {
@@ -179,14 +181,16 @@ if (p->up == 1) {
         p->up = 1;
     }
     }
-}
+}*/
     
 
-    /*int pos_absolux = -50;
-    int pos_absoluy = 0;
+  
+
+    static int pos_absolux = -50;  // Make pos_absolux static to retain its value between function calls
+    static int pos_absoluy = 0;
 
     if (p->up == 1) {
-        pos_absolux += 2;
+        pos_absolux += 4;
         pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
         p->posScreen.x += pos_absolux + 50;
         p->posScreen.y -= pos_absoluy;
@@ -195,9 +199,18 @@ if (p->up == 1) {
             p->posScreen.y += pos_absoluy;
         }
 
-        if (pos_absolux >= 50) {
+        if (pos_absolux >= 10) {
             pos_absolux = -50;
-            p->up = 0;}}*/
+            p->up = 0;
+        }
+    } else { // Character is coming down
+        pos_absoluy = 0.5 * G * dt * dt;
+        p->posScreen.y += pos_absoluy;
+
+        if (p->posScreen.y >= 700) {
+            p->posScreen.y = 700; // Ensure the character doesn't go below the initial position
+        }
+    }
 
 
 		 

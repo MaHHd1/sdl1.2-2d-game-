@@ -89,10 +89,10 @@ void main()
             
         }//WHILE EVENT
 
-                if(p.up==1)
-                {
-                    saut(&p,dt,p.posScreen.x,ST);//Machkok feha 
-                }
+                
+                
+               saut(&p,dt,p.posScreen.x,ST);//Machkok feha 
+                
 
                 if(p.num==6)
                     p.num=0;
