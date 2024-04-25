@@ -29,6 +29,7 @@ void main()
     {    
         t_prev=SDL_GetTicks();
         afficherPerso(&p,screen);
+	
         while(SDL_PollEvent(&event))
         {
             switch(event.type)
@@ -81,6 +82,7 @@ void main()
                     }
 
                 }//CASE
+		
                 
 
             }//SWITCH

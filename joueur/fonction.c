@@ -20,12 +20,12 @@ void initPerso(Personne *p)
 	//strcpy(p->image[1][1].filename,"images2.png");
 	//strcpy(p->image[1][2].filename,"images2.png");
 	//strcpy(p->image[2][0].filename,"images3.png");
-	p->image[0][0].per = IMG_Load("d1.png");
-	p->image[0][1].per = IMG_Load("d2.png");
-	p->image[0][2].per = IMG_Load("d2.png");
-	p->image[1][0].per = IMG_Load("g1.png");
-	p->image[1][1].per = IMG_Load("g2.png");
-	p->image[1][2].per = IMG_Load("g3.png");
+	p->image[0][0].per = IMG_Load("dd1.png");
+	p->image[0][1].per = IMG_Load("dd2.png");
+	p->image[0][2].per = IMG_Load("dd3.png");
+	p->image[1][0].per = IMG_Load("gd1.png");
+	p->image[1][1].per = IMG_Load("gd2.png");
+	p->image[1][2].per = IMG_Load("gd3.png");
 	
 	
 	
@@ -79,13 +79,23 @@ SDL_Flip(screen);
 void movePerso(Personne *p,Uint32 dt)
 {
 
+	if(p->direction==0){
 	p->Step=0.5*p->acceleration*dt*dt+0.5*dt;
 	p->posScreen.x= p->posScreen.x + p->Step;
 	if(p->posScreen.x == 1900)
 		p->posScreen.x = 30;
+	}
+	if(p->direction==1){
+	p->Step=0.5*p->acceleration*dt*dt+0.5*dt;
+	p->posScreen.x= p->posScreen.x - p->Step;
+	if(p->posScreen.x == 0)
+		p->posScreen.x = 30;
+	}
+	
 		
-	if(p-> posScreen.y == 1000)
+	if(p-> posScreen.y == 500)
 		p->posScreen.y = 460;
+
 	
 
 
@@ -139,7 +149,7 @@ void saut(Personne *p,int dt, int posinit,int ST)
 	//}
 }
 	}*/
-	int pos_absolux = -50;
+int pos_absolux = -50;
 int pos_absoluy = 0;
 
 if (p->up == 1) {
@@ -169,7 +179,25 @@ if (p->up == 1) {
         p->up = 1;
     }
     }
-} 
+}
+    
+
+    /*int pos_absolux = -50;
+    int pos_absoluy = 0;
+
+    if (p->up == 1) {
+        pos_absolux += 2;
+        pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
+        p->posScreen.x += pos_absolux + 50;
+        p->posScreen.y -= pos_absoluy;
+
+        if (pos_absoluy == 100) {
+            p->posScreen.y += pos_absoluy;
+        }
+
+        if (pos_absolux >= 50) {
+            pos_absolux = -50;
+            p->up = 0;}}*/
 
 
 		 
@@ -179,7 +207,7 @@ if (p->up == 1) {
 }//Saut
 void liberer(Personne *p)
 {
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 2; i++) {
 	for (int j=0; j < 3; j++){
 		SDL_FreeSurface(p->image[i][j].per);
 	}
