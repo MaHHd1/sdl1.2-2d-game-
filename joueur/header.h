@@ -1,46 +1,43 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
-#include<SDL/SDL.h>
-#include<SDL/SDL_mixer.h>
-#include<SDL/SDL_image.h>
-#include<SDL/SDL_ttf.h>
+#ifndef HEADER_H
+#define HEADER_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_mixer.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include <stdbool.h>
+
 #define SCREEN_W 1920
 #define SCREEN_H 1080
-typedef struct {
-    SDL_Surface *surface;
 
-} IMGv;
-typedef struct {
-    IMGv Life[3];
-    int nv;
-}life;
-typedef struct {
-    SDL_Surface *per; 
-
+typedef struct
+{
+    SDL_Surface *per;
 } IMG;
-typedef struct {
-    IMG image[3][5];// matrice type IMG Struct 
-    SDL_Rect posScreen;// pos fel ecran
-    //SDL_Rect posIMG;
-    float acceleration;// yejri wala lee
+
+typedef struct
+{
+    IMG image[3][5];
+    SDL_Rect posScreen;
+    float acceleration;
     float vitesse;
-    int up;// jump wala lee 0 or 1
-    int direction;// el i mtah el matrice image 
-    int num;// el j mtah el matrice 
-    float Step;// How much does he need to move 
+    int up;
+    int direction;
+    int num;
+    float Step;
     int score;
-    life vie;
-
-
-}Personne;
-
-
+    int moving;
+} Personne;
 
 void initPerso(Personne *p);
-void afficherPerso(Personne *p,SDL_Surface *screen);
-void movePerso(Personne *p,Uint32 dt);
+void afficherPerso(Personne *p, SDL_Surface *screen);
+void movePerso(Personne *p, Uint32 dt);
 void animerPerso(Personne *p);
-void saut(Personne *P,int dt,int posinit,int ST);
+void saut(Personne *p, int dt, int posinit, int ST);
 void liberer(Personne *p);
+
+#endif /* HEADER_H */
+
