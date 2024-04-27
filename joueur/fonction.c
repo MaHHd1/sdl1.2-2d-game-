@@ -10,7 +10,7 @@ void initPerso(Personne *p)
     p->acceleration = 10;
     p->score = 100;
     p->posScreen.x = 30;
-    p->posScreen.y = 400;
+    p->posScreen.y = 600;
     p->posScreen.w = 1; // largeur image
     p->posScreen.h = 1; // Hauteur image
 
@@ -107,8 +107,8 @@ void saut(Personne *p, int dt, int posinit, int ST)
 	else{
 	p->posScreen.y += jump_speed;
 	pos_absoluy -= jump_speed;
-	if(p->posScreen.y >= 400 ){
-			p->posScreen.y = 400;
+	if(p->posScreen.y >= 600 ){
+			p->posScreen.y = 600;
 			p->up=0;}}
 
 
@@ -132,8 +132,8 @@ void saut(Personne *p, int dt, int posinit, int ST)
         pos_absoluy = 0.5 * G * dt * dt;
         p->posScreen.y += pos_absoluy +20;
 
-        if (p->posScreen.y >= 400) {
-            p->posScreen.y = 400; // Ensure the character doesn't go below the initial position
+        if (p->posScreen.y >= 600) {
+            p->posScreen.y = 600; // Ensure the character doesn't go below the initial position
         }
     }}
      if(p->direction == 1 && p->moving == 1){
@@ -155,8 +155,8 @@ void saut(Personne *p, int dt, int posinit, int ST)
     pos_absoluy = 0.5 * G * dt * dt;
     p->posScreen.y += pos_absoluy +20;
 
-    if (p->posScreen.y >= 400) {
-        p->posScreen.y = 400; // Ensure the character doesn't go below the initial position
+    if (p->posScreen.y >= 600) {
+        p->posScreen.y = 600; // Ensure the character doesn't go below the initial position
     }
 }}
 }
