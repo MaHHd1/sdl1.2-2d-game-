@@ -93,7 +93,27 @@ void saut(Personne *p, int dt, int posinit, int ST)
 	int SV=10;
 	static int pos_absolux = -50;  // Make pos_absolux static to retain its value between function calls
     static int pos_absoluy = 0;
-	if(p->direction == 0){
+	int jump_height = 100;
+	int jump_speed = 10;
+	if(p-> moving == 0){
+	if(p->up == 1 ){
+		p->posScreen.y -= jump_speed;
+		pos_absoluy += jump_speed;
+		if(pos_absoluy >= jump_height){
+			p->up=0;}
+		
+
+	}
+	else{
+	p->posScreen.y += jump_speed;
+	pos_absoluy -= jump_speed;
+	if(p->posScreen.y >= 400 ){
+			p->posScreen.y = 400;
+			p->up=0;}}
+
+
+}
+	if(p->direction == 0 && p->moving ==1){
     if (p->up == 1) {
         pos_absolux += 4;
         pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
@@ -116,7 +136,7 @@ void saut(Personne *p, int dt, int posinit, int ST)
             p->posScreen.y = 400; // Ensure the character doesn't go below the initial position
         }
     }}
-     if(p->direction == 1){
+     if(p->direction == 1 && p->moving == 1){
 	if (p->up == 1) {
     pos_absolux += 4;
     pos_absoluy = (-0.04 * (pos_absolux * pos_absolux) + 100);
