@@ -21,7 +21,7 @@ int main()
     else
     {
         screen = SDL_SetVideoMode(SCREEN_W, SCREEN_H, 32, SDL_HWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF);
-        url = IMG_Load("wallpaperflare.com_wallpaper(1).jpg");
+        url = IMG_Load("wallpaperflare.com_wallpaper.jpg");
 	
         //SDL_BlitSurface(url, NULL, screen, &pos);
         initPerso(&p);
