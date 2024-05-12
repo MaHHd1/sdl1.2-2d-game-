@@ -1,5 +1,48 @@
 #include "header.h"
+void initIMG(image *IMG,int x,int y,char nom[])
+{
+IMG->url=IMG_Load(nom);
+if(IMG->url==NULL){
+		printf("Pas d'image\n");
+	}
+else
+{
+	IMG->pos.x=x;
+	IMG->pos.y=y;
+}
 
+
+}
+void afficher_image(SDL_Surface *surf,image img){
+	SDL_BlitSurface(img.url,NULL,surf,&(img.pos));
+}
+void initPerso2(Personne *p)
+{
+    p->direction = 0;
+    p->moving = 0;
+    p->num = 0;
+    p->up = 0;
+    p->vitesse = 5;
+    p->acceleration = 10;
+    p->score = 100;
+    p->posScreen.x = 300;
+    p->posScreen.y = 400;
+    p->posScreen.w = 1; // largeur image
+    p->posScreen.h = 1; // Hauteur image
+
+    p->image[0][0].per = IMG_Load("dd1.png");
+    p->image[0][1].per = IMG_Load("dd2.png");
+    p->image[0][2].per = IMG_Load("dd3.png");
+    p->image[1][0].per = IMG_Load("gd1.png");
+    p->image[1][1].per = IMG_Load("gd2.png");
+    p->image[1][2].per = IMG_Load("gd3.png");
+    p->image[2][0].per = IMG_Load("dd1.png");
+    p->image[2][1].per = IMG_Load("gd3.png");
+
+
+
+
+}
 void initPerso(Personne *p)
 {
     p->direction = 0;
@@ -10,7 +53,7 @@ void initPerso(Personne *p)
     p->acceleration = 10;
     p->score = 100;
     p->posScreen.x = 30;
-    p->posScreen.y = 600;
+    p->posScreen.y = 400;
     p->posScreen.w = 1; // largeur image
     p->posScreen.h = 1; // Hauteur image
 
@@ -40,7 +83,7 @@ if(p->moving == 1){
 
 void movePerso(Personne *p, Uint32 dt)
 {
-    // Implement the movePerso function
+    
    if(p->direction==0 && p->moving == 1){
 	p->Step=0.5*p->acceleration*dt*dt+3*dt;
 	p->posScreen.x= p->posScreen.x + p->Step;
@@ -64,19 +107,19 @@ void movePerso(Personne *p, Uint32 dt)
 
 void animerPerso(Personne *p)
 {
-    // Implement the animerPerso function
+    
   p->num=0;
-  if(p->direction == 0 && p->moving == 1){
+  if(p->moving == 1){
 	if(p->num==3)
 		p->num=0;
-	else
+	if(p->num != 3)
 		p->num++;}
-  if(p->direction == 1 && p->moving == 1){
+  /*if(p->direction == 1 && p->moving == 1){
 	
 	if(p->num==3)
 		p->num=0;
-	else
-		p->num++;}
+	if(p->num != 3)
+		p->num++;}*/
  if(p->moving == 0 && p->direction == 0){
 	p->num=0;}
  if(p->moving == 0 && p->direction == 1){
@@ -85,7 +128,7 @@ void animerPerso(Personne *p)
 	
 }
 
-void saut(Personne *p, int dt, int posinit, int ST)
+void saut(Personne *p, int dt, int posinit)
 {
     // Implement the saut function
 	int G=10;
@@ -93,8 +136,8 @@ void saut(Personne *p, int dt, int posinit, int ST)
 	int SV=10;
 	static int pos_absolux = -50;  // Make pos_absolux static to retain its value between function calls
     static int pos_absoluy = 0;
-	int jump_height = 100;
-	int jump_speed = 10;
+	int jump_height = 80;
+	int jump_speed = 15;
 	if(p-> moving == 0){
 	if(p->up == 1 ){
 		p->posScreen.y -= jump_speed;
