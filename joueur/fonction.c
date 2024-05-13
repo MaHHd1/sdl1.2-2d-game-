@@ -30,14 +30,14 @@ void initPerso2(Personne *p)
     p->posScreen.w = 1; // largeur image
     p->posScreen.h = 1; // Hauteur image
 
-    p->image[0][0].per = IMG_Load("dd1.png");
-    p->image[0][1].per = IMG_Load("dd2.png");
-    p->image[0][2].per = IMG_Load("dd3.png");
-    p->image[1][0].per = IMG_Load("gd1.png");
-    p->image[1][1].per = IMG_Load("gd2.png");
-    p->image[1][2].per = IMG_Load("gd3.png");
-    p->image[2][0].per = IMG_Load("dd1.png");
-    p->image[2][1].per = IMG_Load("gd3.png");
+    p->image[0][0].per = IMG_Load("1.4-removebg-preview.png");
+    p->image[0][1].per = IMG_Load("4.4-removebg-preview.png");
+    p->image[0][2].per = IMG_Load("5.4-removebg-preview.png");
+    p->image[1][0].per = IMG_Load("2.4-removebg-preview.png");
+    p->image[1][1].per = IMG_Load("3.4-removebg-preview.png");
+    p->image[1][2].per = IMG_Load("6.4-removebg-preview.png");
+    p->image[2][0].per = IMG_Load("1.4-removebg-preview.png");
+    p->image[2][1].per = IMG_Load("2.4-removebg-preview.png");
 
 
 

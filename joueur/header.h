@@ -29,6 +29,8 @@ typedef struct
     float Step;
     int score;
     int moving;
+    int vie;
+    int hit;
 } Personne;
 typedef struct{
 	SDL_Surface *url;
